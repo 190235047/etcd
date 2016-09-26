@@ -213,8 +213,8 @@ func (r *raftNode) start(s *EtcdServer) {
                 
                 //testRd := rd.Messages.Unmarshal(rd.Messages)
                 //if len(rd.Messages) > 0 && rd.Messages[0].Type == raftpb.MsgProp {
-                    fmt.Printf("raft.start bbb %#v\n", rd)
-                    debug.PrintStack()
+                    //fmt.Printf("raft.start bbb %#v\n", rd)
+                    //debug.PrintStack()
                 //}
 
 				// the leader can write to its disk in parallel with replicating to the followers and them
