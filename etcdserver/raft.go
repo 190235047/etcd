@@ -33,7 +33,7 @@ import (
 	"github.com/coreos/etcd/wal"
 	"github.com/coreos/etcd/wal/walpb"
 	"github.com/coreos/pkg/capnslog"
-    "runtime/debug"
+    //"runtime/debug"
     //"fmt"
 )
 
