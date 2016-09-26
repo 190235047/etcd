@@ -22,7 +22,6 @@ import (
 	"math/rand"
 	"sort"
 	"strings"
-
 	pb "github.com/coreos/etcd/raft/raftpb"
 )
 
@@ -637,7 +636,9 @@ func (r *raft) Step(m pb.Message) error {
 type stepFunc func(r *raft, m pb.Message)
 
 func stepLeader(r *raft, m pb.Message) {
-	// These message types do not require any progress for m.From.
+	//fmt.Printf("stepLeader:raft %#v\n", r)
+    //fmt.Printf("stepLeader:pb.Message %#v\n", m)
+    // These message types do not require any progress for m.From.
 	switch m.Type {
 	case pb.MsgBeat:
 		r.bcastHeartbeat()

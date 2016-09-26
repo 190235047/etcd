@@ -29,6 +29,7 @@ import (
 	"github.com/coreos/etcd/pkg/pathutil"
 	"github.com/ugorji/go/codec"
 	"golang.org/x/net/context"
+    "github.com/coreos/pkg/capnslog"
 )
 
 const (
@@ -53,6 +54,7 @@ const (
 	ErrorCodeWatcherCleared    = 400
 	ErrorCodeEventIndexCleared = 401
 )
+var plog = capnslog.NewPackageLogger("github.com/coreos/etcd", "keys")
 
 type Error struct {
 	Code    int    `json:"errorCode"`
@@ -341,7 +343,11 @@ func (k *httpKeysAPI) Set(ctx context.Context, key, val string, opts *SetOptions
 		act.Dir = opts.Dir
 		act.NoValueOnSuccess = opts.NoValueOnSuccess
 	}
-
+    fmt.Printf("%#v\n", act)
+    plog.Infof("%#v\n", act)
+    
+    fmt.Printf("printf test")
+    plog.Infof("infof test")
 	doCtx := ctx
 	if act.PrevExist == PrevNoExist {
 		doCtx = context.WithValue(doCtx, &oneShotCtxValue, &oneShotCtxValue)

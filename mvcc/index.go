@@ -17,7 +17,7 @@ package mvcc
 import (
 	"sort"
 	"sync"
-
+    "fmt"
 	"github.com/google/btree"
 )
 
@@ -55,6 +55,8 @@ func (ti *treeIndex) Put(key []byte, rev revision) {
 		return
 	}
 	okeyi := item.(*keyIndex)
+    fmt.Printf("hahahh %#v\n", okeyi)
+    plog.Infof("zzzzzzz %#v\n", okeyi)
 	okeyi.put(rev.main, rev.sub)
 }
 

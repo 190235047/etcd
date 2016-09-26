@@ -76,6 +76,7 @@ type keyIndex struct {
 func (ki *keyIndex) put(main int64, sub int64) {
 	rev := revision{main: main, sub: sub}
 
+    fmt.Printf("key_index hahah")
 	if !rev.GreaterThan(ki.modified) {
 		plog.Panicf("store.keyindex: put with unexpected smaller revision [%v / %v]", rev, ki.modified)
 	}

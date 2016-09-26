@@ -16,9 +16,10 @@ package raft
 
 import (
 	"errors"
-
+    //"fmt"
 	pb "github.com/coreos/etcd/raft/raftpb"
 	"golang.org/x/net/context"
+    //"runtime/debug"
 )
 
 type SnapshotStatus int
@@ -406,6 +407,8 @@ func (n *node) Tick() {
 func (n *node) Campaign(ctx context.Context) error { return n.step(ctx, pb.Message{Type: pb.MsgHup}) }
 
 func (n *node) Propose(ctx context.Context, data []byte) error {
+    //fmt.Printf("Propose hahahha")
+    //debug.PrintStack()
 	return n.step(ctx, pb.Message{Type: pb.MsgProp, Entries: []pb.Entry{{Data: data}}})
 }
 
@@ -429,7 +432,7 @@ func (n *node) ProposeConfChange(ctx context.Context, cc pb.ConfChange) error {
 // Step advances the state machine using msgs. The ctx.Err() will be returned,
 // if any.
 func (n *node) step(ctx context.Context, m pb.Message) error {
-	ch := n.recvc
+    ch := n.recvc
 	if m.Type == pb.MsgProp {
 		ch = n.propc
 	}

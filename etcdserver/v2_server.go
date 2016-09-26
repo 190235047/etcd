@@ -19,6 +19,8 @@ import (
 
 	pb "github.com/coreos/etcd/etcdserver/etcdserverpb"
 	"golang.org/x/net/context"
+ //   "github.com/coreos/pkg/capnslog"
+    "fmt"
 )
 
 type v2API interface {
@@ -32,11 +34,15 @@ type v2API interface {
 
 type v2apiStore struct{ s *EtcdServer }
 
+//var plog = capnslog.NewPackageLogger("github.com/coreos/etcd", "v2_server")
+
 func (a *v2apiStore) Post(ctx context.Context, r *pb.Request) (Response, error) {
 	return a.processRaftRequest(ctx, r)
 }
 
 func (a *v2apiStore) Put(ctx context.Context, r *pb.Request) (Response, error) {
+    fmt.Printf("ffff %#v\n", ctx)
+    plog.Infof("kkkk %#v\n", ctx)
 	return a.processRaftRequest(ctx, r)
 }
 
@@ -56,6 +62,9 @@ func (a *v2apiStore) processRaftRequest(ctx context.Context, r *pb.Request) (Res
 	ch := a.s.w.Register(r.ID)
 
 	start := time.Now()
+    plog.Infof("processRaftRequest:a.s.r %#v\n", a.s.r)
+    plog.Infof("processRaftRequest:pb.Request %#v\n", r)
+    plog.Infof("processRaftRequest:data %#v\n", data)
 	a.s.r.Propose(ctx, data)
 	proposalsPending.Inc()
 	defer proposalsPending.Dec()
