@@ -34,7 +34,7 @@ import (
 	"github.com/coreos/etcd/wal/walpb"
 	"github.com/coreos/pkg/capnslog"
     "runtime/debug"
-    "fmt"
+    //"fmt"
 )
 
 const (
