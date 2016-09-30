@@ -18,6 +18,7 @@ import (
 	pb "github.com/coreos/etcd/etcdserver/etcdserverpb"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+    "fmt"
 )
 
 type (
@@ -90,7 +91,8 @@ func NewKVFromKVClient(remote pb.KVClient) KV {
 }
 
 func (kv *kv) Put(ctx context.Context, key, val string, opts ...OpOption) (*PutResponse, error) {
-	r, err := kv.Do(ctx, OpPut(key, val, opts...))
+	fmt.Printf("clientv3.Put.ctx %#v\n", ctx)
+    r, err := kv.Do(ctx, OpPut(key, val, opts...))
 	return r.put, toErr(ctx, err)
 }
 
