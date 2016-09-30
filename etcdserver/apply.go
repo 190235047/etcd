@@ -153,7 +153,8 @@ func (a *applierV3backend) Apply(r *pb.InternalRaftRequest) *applyResult {
 }
 
 func (a *applierV3backend) Put(txnID int64, p *pb.PutRequest) (*pb.PutResponse, error) {
-	resp := &pb.PutResponse{}
+	plog.Infof("haha apply.Put.p %#v\n", p)
+    resp := &pb.PutResponse{}
 	resp.Header = &pb.ResponseHeader{}
 	var (
 		rev int64

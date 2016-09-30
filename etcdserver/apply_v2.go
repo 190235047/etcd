@@ -59,6 +59,7 @@ func (a *applierV2store) Post(r *pb.Request) Response {
 }
 
 func (a *applierV2store) Put(r *pb.Request) Response {
+    plog.Infof("haha apply_v2.Put.r %#v\n", r)
 	ttlOptions := toTTLOptions(r)
 	exists, existsSet := pbutil.GetBool(r.PrevExist)
 	switch {

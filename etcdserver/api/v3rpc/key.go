@@ -60,7 +60,8 @@ func (s *kvServer) Range(ctx context.Context, r *pb.RangeRequest) (*pb.RangeResp
 }
 
 func (s *kvServer) Put(ctx context.Context, r *pb.PutRequest) (*pb.PutResponse, error) {
-	if err := checkPutRequest(r); err != nil {
+	plog.Infof("haha v3rpc.Put.r %#v\n", r)
+    if err := checkPutRequest(r); err != nil {
 		return nil, err
 	}
 
