@@ -20,6 +20,7 @@ import (
 	"github.com/coreos/etcd/proxy/grpcproxy/cache"
 
 	"golang.org/x/net/context"
+    "fmt"
 )
 
 type kvProxy struct {
@@ -59,7 +60,9 @@ func (p *kvProxy) Range(ctx context.Context, r *pb.RangeRequest) (*pb.RangeRespo
 }
 
 func (p *kvProxy) Put(ctx context.Context, r *pb.PutRequest) (*pb.PutResponse, error) {
-	p.cache.Invalidate(r.Key, nil)
+	fmt.Printf("grpcproxy.Put.ctx  %#v\n", ctx)
+    fmt.Printf("grpcproxy.Put.r  %#v\n", r)
+    p.cache.Invalidate(r.Key, nil)
 	resp, err := p.kv.Do(ctx, PutRequestToOp(r))
 	return (*pb.PutResponse)(resp.Put()), err
 }
