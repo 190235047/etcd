@@ -104,7 +104,9 @@ func (s *EtcdServer) Range(ctx context.Context, r *pb.RangeRequest) (*pb.RangeRe
 }
 
 func (s *EtcdServer) Put(ctx context.Context, r *pb.PutRequest) (*pb.PutResponse, error) {
-	result, err := s.processInternalRaftRequest(ctx, pb.InternalRaftRequest{Put: r})
+	plog.Infof("v3_server.Put.ctx %#v\n", ctx)
+    plog.Infof("v3_server.Put.r %#v\n", r)
+    result, err := s.processInternalRaftRequest(ctx, pb.InternalRaftRequest{Put: r})
 	if err != nil {
 		return nil, err
 	}

@@ -608,6 +608,8 @@ func (s *EtcdServer) run() {
 			if ci != 0 {
 				s.setCommittedIndex(ci)
 			}
+            //plog.Infof("run.ep %#v\n", ep)
+            //plog.Infof("run.ap %#v\n", ap)
 			f := func(context.Context) { s.applyAll(&ep, &ap) }
 			sched.Schedule(f)
 		case leases := <-expiredLeaseC:
